@@ -9,17 +9,9 @@ class ReservierungsDaten(
     data class Wagon(
         val number: Int,
         val layout: String,
-        val type: WagonType,
         val `class`: List<Int>,
         val seats: Map<Int, Seat>,
     ) {
-
-        enum class WagonType {
-            WAGON,
-            TRIEBWAGEN,
-            BOARDBISTRO,
-            ;
-        }
 
         data class Seat(
             @JsonIgnore val number: Int,
@@ -30,9 +22,6 @@ class ReservierungsDaten(
             enum class SeatStatus {
                 RESERVED,
                 AVAILABLE,
-                PENDLER,
-                UNAVAILABLE,
-                BAHNBONUS,
                 UNKNOWN,
                 ;
 

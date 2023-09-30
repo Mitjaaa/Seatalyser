@@ -10,11 +10,12 @@ import com.fasterxml.jackson.module.kotlin.KotlinFeature
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.jsoup.Jsoup
+import java.util.Date
 
 fun main(args: Array<String>) {
     val query = ReservierungsQuery()
-    val response = fetchReservierung(query)
-    println(response)
+    val query2 = fetchReservierung("803", Date(2023, 10, 3), ReservierungsQuery.Buchungskontext.Kontext.Abfahrt("8010205", "2023-10-01T20:50:00"), 8010101, ReservierungsQuery.Buchungskontext.Kontext.KategorieCode.KLASSE_2)
+    println(query2)
 }
 
 
@@ -36,6 +37,25 @@ val MAPPER = JsonMapper.builder()
     )
     .registerModule(JavaTimeModule())
     .setDefaultMergeable(true)
+
+private fun Int.prependDate(): String {
+    val string = toString()
+    if (string.length == 2) return string
+    return "0".repeat(2 - string.length) + string
+}
+
+fun fetchReservierung(zugnummer: String, datum: Date, abfahrt: ReservierungsQuery.Buchungskontext.Kontext.Abfahrt, ankunft: Int, klasse: ReservierungsQuery.Buchungskontext.Kontext.KategorieCode): List<Any>? {
+    val key = "EPA#${zugnummer}_${datum.year}-${datum.month.prependDate()}-${datum.day.prependDate()}" // "EPA#803_2023-10-03
+    val request = ReservierungsQuery(buchungskontext = ReservierungsQuery.Buchungskontext(buchungsKontextDaten = ReservierungsQuery.Buchungskontext.Kontext(
+        zugnummer = zugnummer,
+        zugfahrtKey = key,
+        abfahrtHalt = abfahrt,
+        ankunftHalt = ReservierungsQuery.Buchungskontext.Kontext.Ankunft(ankunft.toString()),
+        klasse,
+    )))
+
+    return fetchReservierung(request)
+}
 
 fun fetchReservierung(query: ReservierungsQuery): List<Any>? {
     val connection = Jsoup.connect("https://www.bahn.de/web/api/gsd/gsd_v3/")
