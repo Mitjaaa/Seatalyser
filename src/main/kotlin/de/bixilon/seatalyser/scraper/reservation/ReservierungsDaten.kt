@@ -1,8 +1,8 @@
-package de.bixilon.seatalyser
+package de.bixilon.seatalyser.scraper.reservation
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 
-class ReservierungsDaten(
+data class ReservierungsDaten(
     val carriage: List<Wagon>,
 ) {
 

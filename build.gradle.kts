@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.9.0"
+    kotlin("jvm") version "1.9.10"
     application
 }
 
@@ -28,6 +28,7 @@ fun DependencyHandler.jackson(group: String, name: String) {
 
 dependencies {
     implementation("de.bixilon:kutil:1.23.2")
+    testImplementation("org.testng:testng:7.1.0")
     jacksonCore("core")
     jacksonCore("databind")
     jackson("module", "kotlin")
@@ -46,7 +47,7 @@ kotlin {
 }
 
 application {
-    mainClass.set("MainKt")
+    mainClass.set("de.bixilon.searalyser.Seatalyser")
 }
 
 tasks.withType<KotlinCompile> {

@@ -1,17 +1,16 @@
-package de.bixilon.seatalyser
+package de.bixilon.seatalyser.scraper.reservation
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import de.bixilon.kutil.uuid.UUIDUtil.toUUID
-import java.util.UUID
+import de.bixilon.kutil.exception.Broken
+import java.util.*
 
 data class ReservierungsQuery(
     @JsonProperty("displayinformation") val displayInformation: DisplayInformation = DisplayInformation(),
-    val buchungskontext: Buchungskontext = Buchungskontext(),
+    val buchungskontext: Buchungskontext,
     @JsonProperty("correlationID") val correlationID: String = UUID.randomUUID().toString() + "_" + UUID.randomUUID().toString(),
     val lang: String = "de",
     val theme: String = "web",
 ) {
-
 
     data class DisplayInformation(
         val zugbezeichnung: String = "",
@@ -21,15 +20,15 @@ data class ReservierungsQuery(
 
     data class Buchungskontext(
         val quellSystem: String = "SIMA",
-        val buchungsKontextDaten: Kontext = Kontext(),
+        val buchungsKontextDaten: Kontext,
     ) {
 
         data class Kontext(
-            val zugnummer: String = "803",
-            val zugfahrtKey: String = "EPA#803_2023-10-03",
-            val abfahrtHalt: Abfahrt = Abfahrt("8010205", "2023-10-01T20:50:00"),
-            val ankunftHalt: Ankunft = Ankunft("8010101"),
-            val servicekategorieCode: KategorieCode = KategorieCode.KLASSE_2,
+            val zugnummer: Int,
+            val zugfahrtKey: String,
+            val abfahrtHalt: Abfahrt,
+            val ankunftHalt: Ankunft,
+            val servicekategorieCode: KategorieCode,
             val serviceKategorie: Kategorie = servicekategorieCode.kategorie,
             val anzahlReisende: Int = 1,
             val inventarsystem: String = "EPA",
@@ -38,19 +37,29 @@ data class ReservierungsQuery(
         ) {
 
             data class Abfahrt(
-                val locationId: String,
+                val locationId: Int,
                 val abfahrtZeit: String,
             )
 
             data class Ankunft(
-                val locationId: String,
-                val ankunftZeit: String="0000-01-01T00:00:00",
+                val locationId: Int,
+                val ankunftZeit: String = "0000-01-01T00:00:00",
             )
 
             enum class KategorieCode(val kategorie: Kategorie) {
                 KLASSE_1(Kategorie.SITZPLATZ_KLASSE_1),
                 KLASSE_2(Kategorie.SITZPLATZ_KLASSE_2),
                 ;
+
+
+                companion object {
+
+                    fun byClass(`class`: Int) = when (`class`) {
+                        1 -> KLASSE_1
+                        2 -> KLASSE_2
+                        else -> Broken("Not a class: $`class`")
+                    }
+                }
             }
 
             enum class Kategorie {
@@ -60,5 +69,4 @@ data class ReservierungsQuery(
             }
         }
     }
-
 }
