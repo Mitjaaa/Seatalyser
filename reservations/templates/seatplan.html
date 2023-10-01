@@ -1,4 +1,6 @@
-<div class="position-relative" 
+<h1 style="">SEATS</h1>
+
+<div class="position-relative rounded-3" 
   style="
   width:{{ width }}px;
   height: {{ height }}px;
@@ -9,13 +11,14 @@
   {% for seat in seats%}
     {% for key, value in seat.items %}
       {% if key == 'nummer' %}
-        <div class="text-center position-absolute" style="
+        <div class="text-center position-absolute rounded-3" style="
           width: 33px;
           height: 33px;
           border: 2px solid #000000;
           background-color: {{ reservations|get_color_for_status:value }};
           top: {% get_y seats forloop.parentloop.counter0 request %}px;
           left: {% get_x seats forloop.parentloop.counter0 request %}px;
+          padding-top: 0.15rem;
           ">
             <div>
               {{ value }}
@@ -23,7 +26,7 @@
           </div>
       {% elif key == 'subtype' %}
           {% if not 'WAND'|first in value %}
-            <div class="text-center position-absolute" style="
+            <div class="text-center position-absolute rounded-3" style="
             width: {% if value == 'TISCH_GROSS' %} {{ request|get_table_width }}px {% else %} 33px {% endif %};;
             height: {% if value == 'TISCH_GROSS' %} {{ request|get_table_height }}px {% else %} 33px {% endif %};
             border: 2px solid #000000;
