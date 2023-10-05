@@ -1,4 +1,4 @@
-package de.bixilon.seatalyser.scraper.reservation
+package de.seatalyser.scraper.reservation
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import de.bixilon.kutil.exception.Broken

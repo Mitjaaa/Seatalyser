@@ -1,8 +1,8 @@
-package de.bixilon.seatalyser
+package de.seatalyser
 
 import com.fasterxml.jackson.module.kotlin.readValue
-import de.bixilon.seatalyser.scraper.reservation.ReservierungsDaten
-import de.bixilon.seatalyser.scraper.reservation.ReservierungsParser
+import de.seatalyser.scraper.reservation.ReservierungsDaten
+import de.seatalyser.scraper.reservation.ReservierungsParser
 import org.testng.annotations.Test
 import kotlin.test.assertEquals
 

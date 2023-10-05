@@ -1,6 +1,6 @@
-package de.bixilon.seatalyser
+package de.seatalyser
 
-import de.bixilon.seatalyser.scraper.reservation.ReservierungsParser
+import de.seatalyser.scraper.reservation.ReservierungsParser
 import org.testng.annotations.Test
 import java.time.ZonedDateTime
 import kotlin.test.assertEquals

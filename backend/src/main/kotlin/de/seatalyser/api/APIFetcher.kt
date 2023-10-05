@@ -1,4 +1,4 @@
-package de.bixilon.seatalyser.api
+package de.seatalyser.api
 
 import de.bixilon.kutil.concurrent.pool.DefaultThreadPool
 import org.jsoup.Connection

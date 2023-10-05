@@ -1,12 +1,12 @@
-package de.bixilon.seatalyser.scraper.reservation
+package de.seatalyser.scraper.reservation
 
 import com.fasterxml.jackson.module.kotlin.readValue
 import de.bixilon.kutil.cast.CastUtil.unsafeCast
 import de.bixilon.kutil.json.JsonObject
 import de.bixilon.kutil.primitive.IntUtil.toInt
-import de.bixilon.seatalyser.MAPPER
-import de.bixilon.seatalyser.dto.Train
-import de.bixilon.seatalyser.dto.TrainRoute
+import de.seatalyser.MAPPER
+import de.seatalyser.dto.Train
+import de.seatalyser.dto.TrainRoute
 import org.jsoup.Connection
 import org.jsoup.Jsoup
 import java.text.SimpleDateFormat

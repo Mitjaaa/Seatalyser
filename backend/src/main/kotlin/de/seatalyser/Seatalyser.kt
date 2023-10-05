@@ -1,4 +1,4 @@
-package de.bixilon.seatalyser
+package de.seatalyser
 
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.json.JsonReadFeature
@@ -9,11 +9,12 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.KotlinFeature
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import de.bixilon.kutil.cast.CastUtil.unsafeNull
-import de.bixilon.seatalyser.database.Database
-import de.bixilon.seatalyser.dto.Train
-import de.bixilon.seatalyser.dto.TrainRoute
-import de.bixilon.seatalyser.scraper.reservation.ReservierungsParser
-import de.bixilon.seatalyser.scraper.reservation.ReservierungsParser.fetchReservierung
+import de.seatalyser.database.Database
+import de.seatalyser.dto.Train
+import de.seatalyser.dto.TrainRoute
+import de.seatalyser.scraper.reservation.ReservierungsParser
+import de.seatalyser.scraper.reservation.ReservierungsParser.fetchReservierung
+import de.seatalyser.server.RestServer
 import java.time.ZonedDateTime
 
 
@@ -32,10 +33,14 @@ object Seatalyser {
 
         println("Starting reservation fetcher...")
 
+        RestServer().run()
+
+        /*
         val train = Train(Train.TrainTypes.ICE, 603, emptyList())
         val route = TrainRoute(8010205, 8010101, ZonedDateTime.of(2023, 10, 5, 17, 48, 0, 0, ReservierungsParser.TIMEZONE).toInstant())
         val reservierung = fetchReservierung(ReservierungsParser.createQuery(train, route, 2))
         println(reservierung)
+         */
     }
 }
 

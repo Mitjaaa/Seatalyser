@@ -6,7 +6,7 @@ plugins {
 }
 
 
-group = "de.bixilon"
+group = "de.seatalyser"
 version = "1.0-SNAPSHOT"
 
 
@@ -28,12 +28,15 @@ fun DependencyHandler.jackson(group: String, name: String) {
 
 dependencies {
     implementation("de.bixilon:kutil:1.23.2")
-    testImplementation("org.testng:testng:7.1.0")
+    testImplementation("org.testng:testng:7.7.0")
     jacksonCore("core")
     jacksonCore("databind")
     jackson("module", "kotlin")
     jackson("datatype", "jsr310")
     implementation("org.jsoup:jsoup:1.16.1")
+
+    implementation("io.ktor:ktor-server-core:2.3.4")
+    implementation("io.ktor:ktor-server-netty:2.3.4")
 
     testImplementation(kotlin("test"))
 }
@@ -47,7 +50,7 @@ kotlin {
 }
 
 application {
-    mainClass.set("de.bixilon.searalyser.Seatalyser")
+    mainClass.set("de.seatalyser.Seatalyser")
 }
 
 tasks.withType<KotlinCompile> {

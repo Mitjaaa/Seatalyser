@@ -1,4 +1,4 @@
-package de.bixilon.seatalyser.dto
+package de.seatalyser.dto
 
 import java.time.Instant
 

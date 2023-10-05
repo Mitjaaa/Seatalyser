@@ -1,4 +1,4 @@
-package de.bixilon.seatalyser.database
+package de.seatalyser.database
 
 interface Database {
 

@@ -1,4 +1,4 @@
-package de.bixilon.seatalyser.dto
+package de.seatalyser.dto
 
 data class TrainSchedule(
     val train: Int,
