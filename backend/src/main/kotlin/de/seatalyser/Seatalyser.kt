@@ -35,12 +35,11 @@ object Seatalyser {
 
         RestServer().run()
 
-        /*
-        val train = Train(Train.TrainTypes.ICE, 603, emptyList())
-        val route = TrainRoute(8010205, 8010101, ZonedDateTime.of(2023, 10, 5, 17, 48, 0, 0, ReservierungsParser.TIMEZONE).toInstant())
+
+        /*val train = Train(Train.TrainTypes.IC, 94, emptyList())
+        val route = TrainRoute(8001844, 8011160, ZonedDateTime.of(2023, 10, 20, 0, 43, 0, 0, ReservierungsParser.TIMEZONE).toInstant())
         val reservierung = fetchReservierung(ReservierungsParser.createQuery(train, route, 2))
-        println(reservierung)
-         */
+        println(reservierung)*/
     }
 }
 
